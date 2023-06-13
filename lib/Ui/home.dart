@@ -1,10 +1,12 @@
+import 'package:e_store/Repository/modelclass/CategoryModel.dart';
+import 'package:e_store/Ui/productpage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
-import '../Bloc/category_bloc.dart';
+import '../Bloc/Category/category_bloc.dart';
 import '../Repository/modelclass/ProductsModel.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,28 +16,6 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-List<dynamic> categories = [
-  "smartphones",
-  "laptops",
-  "fragrances",
-  "skincare",
-  "groceries",
-  "home-decoration",
-  "furniture",
-  "tops",
-  "womens-dresses",
-  "womens-shoes",
-  "mens-shirts",
-  "mens-shoes",
-  "mens-watches",
-  "womens-watches",
-  "womens-bags",
-  "womens-jewellery",
-  "sunglasses",
-  "automotive",
-  "motorcycle",
-  "lighting"
-];
 late CategoryModel categorie;
 String street = '';
 
@@ -146,11 +126,10 @@ class _HomePageState extends State<HomePage> {
                     // Horizontal spacing
 
                     shrinkWrap: true,
-                    children: List.generate(categorie.products!.length,
+                    children: List.generate(categorie.categories!.length,
                         growable: false, (index) {
-                      print(categorie.products!.length);
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Product(categoryName: categorie.categories![index].characters.toString(),)));},
                         child: Card(
                           elevation: 2.2,
                           shape: RoundedRectangleBorder(
@@ -163,30 +142,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10),
                               color: Color(0xff95BDC6).withOpacity(0.22),
                             ),
-                            child: Stack(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                      child: Container(
-                                        width: mwidth * 0.266,
-                                        height: mheight * 0.13,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10)),
-                                        ),
-                                        child: Image.network(
-                                          categorie.products![index].images![0],
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                            child: Center(child: Text(categorie.categories![index].characters.toString()),)
                           ),
                         ),
                       );

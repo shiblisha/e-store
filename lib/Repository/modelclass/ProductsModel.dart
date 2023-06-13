@@ -1,11 +1,11 @@
-class CategoryModel {
-  CategoryModel({
+class ProductModel {
+  ProductModel({
       this.products,
       this.total,
       this.skip,
       this.limit,});
 
-  CategoryModel.fromJson(dynamic json) {
+  ProductModel.fromJson(dynamic json) {
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
