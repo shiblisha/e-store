@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Bloc/Category/category_bloc.dart';
 import 'Bloc/Products/product_bloc.dart';
 import 'Ui/home.dart';
+import 'Ui/splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: HomePage()
+          home: SplashScreen()
       ),
     );
   }

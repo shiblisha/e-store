@@ -24,7 +24,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         print(e);
         emit(CategoryblocError());
       }
-      // TODO: implement event handler
+
     });
   }
 }

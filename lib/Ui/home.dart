@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-
 import '../Bloc/Category/category_bloc.dart';
-import '../Repository/modelclass/ProductsModel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -113,40 +111,42 @@ class _HomePageState extends State<HomePage> {
                 categorie =
                     BlocProvider.of<CategoryBloc>(context).categoryModel;
 
-                return GridView.count(
-                    childAspectRatio: (itemWidth / itemHeight),
-                    padding: EdgeInsets.only(
-                        top: mheight * 0.026,
-                        left: mwidth * 0.02,
-                        right: mwidth * 0.015),
-                    crossAxisCount: 3,
-                    mainAxisSpacing: mwidth * 0.05,
-                    // Vertical spacing
-                    crossAxisSpacing: mwidth * 0.05,
-                    // Horizontal spacing
+                return Expanded(
+                  child: GridView.count(
+                      childAspectRatio: (itemWidth / itemHeight),
+                      padding: EdgeInsets.only(
+                          top: mheight * 0.026,
+                          left: mwidth * 0.02,
+                          right: mwidth * 0.015),
+                      crossAxisCount: 3,
+                      mainAxisSpacing: mwidth * 0.05,
+                      // Vertical spacing
+                      crossAxisSpacing: mwidth * 0.05,
+                      // Horizontal spacing
 
-                    shrinkWrap: true,
-                    children: List.generate(categorie.categories!.length,
-                        growable: false, (index) {
-                      return GestureDetector(
-                        onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Product(categoryName: categorie.categories![index].characters.toString(),)));},
-                        child: Card(
-                          elevation: 2.2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Container(
-                            height: mheight * 0.2,
-                            // Set the desired image height
-                            decoration: BoxDecoration(
+                      shrinkWrap: true,
+                      children: List.generate(categorie.categories!.length,
+                          growable: false, (index) {
+                        return GestureDetector(
+                          onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Product(categoryName: categorie.categories![index].characters.toString(),)));},
+                          child: Card(
+                            elevation: 2.2,
+                            shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
-                              color: Color(0xff95BDC6).withOpacity(0.22),
                             ),
-                            child: Center(child: Text(categorie.categories![index].characters.toString()),)
+                            child: Container(
+                              height: mheight * 0.2,
+                              // Set the desired image height
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color(0xff95BDC6).withOpacity(0.22),
+                              ),
+                              child: Center(child: Container(child: Text(categorie.categories![index].characters.toString())),)
+                            ),
                           ),
-                        ),
-                      );
-                    }));
+                        );
+                      })),
+                );
               }
 
               if (state is CategoryblocError) {
